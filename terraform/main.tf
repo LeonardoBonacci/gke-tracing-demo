@@ -33,14 +33,13 @@ resource "google_container_cluster" "primary" {
 
   // Scopes were a pre-IAM method of giving instances API access
   // They are still around we need to give our cluster nodes
-  // access to PubSub and Tracing as well as the standard scopes
+  // access to Tracing as well as the standard scopes
   node_config {
     oauth_scopes = [
       "https://www.googleapis.com/auth/compute",
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
       "https://www.googleapis.com/auth/devstorage.read_only",
-      "https://www.googleapis.com/auth/pubsub",
       "https://www.googleapis.com/auth/trace.append",
     ]
   }
@@ -52,18 +51,6 @@ resource "google_container_cluster" "primary" {
   provisioner "local-exec" {
     command = "gcloud container clusters get-credentials ${google_container_cluster.primary.name} --zone ${google_container_cluster.primary.location} --project ${var.project}"
   }
-}
-
-// Creates a Cloud Pub/Sub Topic
-resource "google_pubsub_topic" "tracing-demo-topic" {
-  name = "tracing-demo"
-}
-
-// Creates a Cloud Pub/Sub Subscription
-// You need a subscription to pull messages from a topic
-resource "google_pubsub_subscription" "tracing-demo-subscription" {
-  name  = "tracing-demo-cli"
-  topic = google_pubsub_topic.tracing-demo-topic.name
 }
 
 output "cluster_name" {

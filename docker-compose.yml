@@ -1,0 +1,22 @@
+---
+version: '2'
+services:
+  one:
+   image: leonardobonacci/tracing-one-demo
+   build: tracing1
+   container_name: one
+   ports:
+      - "8080:8080"
+   depends_on:
+     - two
+   environment:
+     - SPRING_PROFILES_ACTIVE=docker
+
+  two:
+    image: leonardobonacci/tracing-two-demo
+    build: tracing2
+    container_name: two
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
