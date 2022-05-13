@@ -1,5 +1,7 @@
 package guru.bonacci.gcp.tracing2;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -12,14 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @SpringBootApplication
-public class Tracing2Application {
+public class BackendApp {
 
+  private static final Logger log = LoggerFactory.getLogger(BackendApp.class);
+
+  
 	public static void main(String[] args) {
-		SpringApplication.run(Tracing2Application.class, args);
+		SpringApplication.run(BackendApp.class, args);
 	}
 	
-	@GetMapping("/{input}") 
-  public ResponseEntity<String> echo(@PathVariable String input) {
-      return new ResponseEntity<String>("echo 2 " + input, HttpStatus.OK);
+  @GetMapping("/echo/{input}") 
+  public String echo(@PathVariable String input) {
+    log.info("frontend incoming = outgoing {}", input);
+    return input;
   }
 }
