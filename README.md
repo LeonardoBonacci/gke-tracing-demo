@@ -1,3 +1,10 @@
+https://cloud.spring.io/spring-cloud-static/Greenwich.RC1/multi/multi__stackdriver_logging.html
+
+https://github.com/spring-attic/spring-cloud-gcp/blob/main/spring-cloud-gcp-samples/spring-cloud-gcp-logging-sample/src/main/resources/logback-spring.xml
+
+https://docs.spring.io/spring-cloud-gcp/docs/current/reference/html/logging.html#_stackdriver_logging
+
+
 # Tracing with Stackdriver on Kubernetes Engine
 
 <!-- omit in toc -->
